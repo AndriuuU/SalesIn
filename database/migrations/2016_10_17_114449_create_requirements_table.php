@@ -14,10 +14,12 @@ class CreateRequirementsTable extends Migration
     public function up()
     {
         Schema::create('requirements', function (Blueprint $table) {
-            $table->unsignedBigIncrements('id');
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
             $table->text('description');
-            $table->unsignedBigIncrements('offer_id')->references('id')->on('offers');
-            $table->boolean('deleted');
+            $table->unsignedBigInteger('offer_id');
+            $table->foreign('offer_id')->references('id')->on('offers');
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }
