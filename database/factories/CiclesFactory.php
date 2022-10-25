@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\cicles;
+use App\Cicles;
 use Faker\Generator as Faker;
 
-$factory->define(cicles::class, function (Faker $faker) {
+$factory->define(Cicles::class, function (Faker $faker) {
     return [
-        'name' => $faker->paragraph,
-        'img' => $faker->paragraph,
+        'name' => $faker->sentence,
+        'img' => $faker->sentence,
     ];
 });
