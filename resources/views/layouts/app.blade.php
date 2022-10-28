@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -23,6 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -72,9 +74,11 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="container">
             @yield('content')
-        </main>
+        </div>
+        
+        
     </div>
 </body>
 </html>
