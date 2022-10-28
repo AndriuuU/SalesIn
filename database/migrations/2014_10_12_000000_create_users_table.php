@@ -21,11 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('type');
+            $table->string('type') -> default('U');
             $table->boolean('actived')->default(0);
             $table->unsignedBigInteger('cicle_id');
             $table->foreign('cicle_id')->references('id')->on('cicles');
-            $table->unsignedBigInteger('num_offer_applied');
             $table->boolean('deleted')->default(0);
             $table->rememberToken();
             $table->timestamps();
