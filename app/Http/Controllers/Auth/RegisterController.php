@@ -7,6 +7,7 @@ use App\Cicles;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 
@@ -53,6 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
+            'cicle_id' => ['required', 'int'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],    
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -70,17 +72,21 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
+            'cicle_id' => $data['cicle_id'],
             'password' => Hash::make($data['password']),
         ]);
 
 
     }
 
-    protected function edit($id)
+   /**
+    * Show the application registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function showRegistrationForm()
     {
-        $user = User::findOrFail($id);
-        $cicles = cicles::all();
-
-        return view('backend.dashboard.users.edit', compact('cicles', 'user'));
+        $cicles=cicles::all();
+        return view('auth.register', compact('cicles'));
     }
 }

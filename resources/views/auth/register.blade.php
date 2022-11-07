@@ -29,7 +29,7 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('name') is-invalid @enderror" surname="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+                                <input id="surname" type="text" class="form-control @error('name') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
 
                                 @error('surname')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
 
                             <div class="col-md-6">
 
-                                <select name="cicle_id" class="form-control custom-select">
+                                <select name="cicle_id" class="form-control @error('email') is-invalid @enderror" name="cicle_id" value="{{ old('cicle_id') }}">>
                                     <option value="">Select Cicle</option>
                                     @foreach($cicles as $cicle)
                                         <option value="{{ $cicle->id }}">{{ $cicle->name }}</option>
