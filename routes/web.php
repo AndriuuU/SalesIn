@@ -14,11 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+ 
 
-Auth::routes();
-Route::resource('/admin', 'AdminController');
-
-Route::get('/admin/{$user}', 'AdminController@verify');
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->name('users.index');
+Route::POST('/admin/elimi/{user}', 'AdminController@eliminar')->name('user.delete');
+Route::get('/admin/valid/{user}', 'AdminController@validar')->name('user.valid');;
+//Route::post('', 'AdminController@eliminar');
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
