@@ -7,6 +7,20 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+
+    protected function authenticated()
+    {
+        if(\Auth::User()->email_verified_at==null) {
+            \Auth::logout();
+            return redirect('/login')->with('error', 'No has verificado el email');
+
+        }else if(\Auth::user()->actived==0) {
+            \Auth::logout();
+            return redirect('/login')->with('error', 'El administrador no te ha verificado');
+        }else
+            return view('welcome');
+        
+    }
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -36,4 +50,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    
 }

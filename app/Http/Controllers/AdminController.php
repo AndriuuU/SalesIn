@@ -20,10 +20,6 @@ class AdminController extends Controller
 		return "NO HAS INICIADO SESION";
 	}
 
-	public function create() {
-        return view('users.create');
-    } 
-
 	public function validar(User $user) {
 		$user = User::find($user->id);
 		if($user->actived == 0){
