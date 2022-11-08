@@ -17,6 +17,7 @@ class AdminController extends Controller
 		}else{
 			return "NO ERES ADMIN";
 		}
+		return "NO HAS INICIADO SESION";
 	}
 
 	public function create() {
