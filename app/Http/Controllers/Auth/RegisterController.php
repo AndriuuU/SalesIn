@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+
 
 
 class RegisterController extends Controller
@@ -50,7 +52,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
+    {   \Auth::logout();
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -58,6 +60,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],    
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        \Auth::logout();
     }
 
     /**
@@ -69,6 +72,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
+        
         return User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
@@ -77,6 +81,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
+        
     }
 
    /**
@@ -88,5 +93,16 @@ class RegisterController extends Controller
     {
         $cicles=cicles::all();
         return view('auth.register', compact('cicles'));
+    }
+
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return redirect($this->redirectPath())->with('message', 'Your message');
     }
 }
