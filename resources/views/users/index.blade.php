@@ -68,7 +68,7 @@
                             <a class="btn btn-success" href="{{route('user.valid', [$user->id])}}"><i class="fa fa-pause-circle"></i></a>
                         @endif
                     
-                        <a class="btn btn-primary" href="{{route('user.edit', [$user->id])}}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-primary" href="{{route('users.edit', [$user->id])}}"><i class="fa fa-pencil"></i></a>
 
                         @csrf
                         <button type="submit" class="btn btn-danger" onclick="return confirElimi()"><span class="fa fa-remove"></span></button>

@@ -24,7 +24,8 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/admin', 'AdminController@index')->name('users.index');
 Route::POST('/admin/elimi/{user}', 'AdminController@eliminar')->name('user.delete');
 Route::get('/admin/valid/{user}', 'AdminController@validar')->name('user.valid');;
-Route::get('/admin/edit/{user}', 'AdminController@editar')->name('user.edit');
+Route::get('/edit/', [ 'as' => 'users.edit', 'uses' => 'AdminController@editar']);
+// Route::get('/admin/edit/{user}', 'AdminController@editar')->name('user.edit');
 //Route::post('', 'AdminController@eliminar');
 
 Route::get('profile', function () {

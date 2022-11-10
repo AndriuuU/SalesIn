@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Edit User') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('edit') }}">
+                    <form method="POST" action="{{ route('users.edit') }}">
                         @csrf
 
                         <div class="form-group row">
