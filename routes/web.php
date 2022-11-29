@@ -32,6 +32,9 @@ Route::get('profile', function () {
     // Only verified users may enter...
 })->middleware('verified');
 
+// Noticias
+
+Route::get('/articles', 'ArticlesController@index');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
