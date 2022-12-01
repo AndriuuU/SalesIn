@@ -35,6 +35,8 @@ Route::get('profile', function () {
 // Noticias
 
 Route::get('/articles', 'ArticlesController@index');
+Route::get('/articles/create', 'ArticlesController@create')->name('articles.create');
+Route::post('/articles/create/add', 'ArticlesController@add')->name('articles.add');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
