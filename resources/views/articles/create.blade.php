@@ -9,11 +9,12 @@
     </div>
 
     <form action="{{route('articles.add')}}" method="POST">
-    
+        @csrf
+        @METHOD("POST")
         <div class="form-group row">
             <label for="inputtitle" class="col-sm-2 col-form-label text-md-right">Title</label>
             <div class="col-sm-10">
-            <input name="Title" type="text" class="form-control" id="inputtitle" placeholder="Title article">
+            <input name="title" type="text" class="form-control" id="inputtitle" placeholder="Title article">
             </div>
         </div>
         
@@ -61,4 +62,5 @@
             </div>
         </div>
     </form>
+    
 @endsection

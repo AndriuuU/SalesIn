@@ -33,6 +33,9 @@
         </tr>
         @endforeach
     </table>
+    <div class="card-footer mr-auto">
+        {{$articles->links()}}
+    </div>
 
     <form action="{{route('articles.create')}}" method="GET">
         <button type="submit" class="btn btn-primary" ><span class="fa fa-add">ADD</span></button>

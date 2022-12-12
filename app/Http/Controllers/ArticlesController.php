@@ -13,8 +13,8 @@ class ArticlesController extends Controller
 
     public function index(Request $request){
 
-        $articles=Articles::all();
-		return view('articles.index', compact('articles')) ->with('i', (request()->input('page', 1) - 1) * 5);
+        $articles=Articles::paginate(5);
+		return view('articles.index', compact('articles'));
 		// return view('articles.index');
 		
 	}
@@ -25,26 +25,35 @@ class ArticlesController extends Controller
         return view('articles.create', compact('cicles'));
     }
 
-	protected function add(array $data)
+	protected function add(Request $request)
     {
         
         return Articles::create([
-            'title' => $data['title'],
-            'image' => $data['image'],
-            'description' => $data['description'],
-            'cicle_id' => $data['cicle_id'],
+            'title' => $request['title'],
+            'image' => $request['image'],
+            'description' => $request['description'],
+            'cicle_id' => $request['cicle_id'],
         ]);
     }
 
-	protected function validator(array $data)
+	protected function validator(Request $request)
     {   
-        return Validator::make($data, [
+        return Validator::make($request, [
             'title' => ['required', 'string', 'max:255'],
             'image' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             'description' => ['required', 'string', 'max:255'],
             'cicle_id' => ['required', 'int'],
         ]);
         
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($articles = $this->create($request->all())));
+
+        return redirect($this->redirectPath())->with('message', 'Se insertó correctamente');
     }
 
     
