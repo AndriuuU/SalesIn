@@ -17,20 +17,22 @@
             <th> Botones </th>
         </tr>
         @foreach ($articles as $article)
+        @if($article-> deleted==0)
         <tr>
             <td>{{ $article->id  }}</td>
             <td>{{ $article->title }} </td>
             <td>{{ $article->image }}</td>
             <td>
-                <form action=" " method="POST">                                        
-                    <a class="btn btn-primary" href=""><i class="fa fa-pencil"></i></a>
+                <form action="{{route('articles.delete', [$article->id])}}" method="POST">                                        
+                    <a class="btn btn-primary" href="{{route('articles.edit', [$article->id])}}"><i class="fa fa-pencil"></i></a>
                     @csrf
                     <button type="submit" class="btn btn-danger" ><span class="fa fa-remove"></span></button>    
                 </form>
 
-                </td>
+            </td>
 
         </tr>
+        @endif
         @endforeach
     </table>
     <div class="card-footer mr-auto">
@@ -40,4 +42,7 @@
     <form action="{{route('articles.create')}}" method="GET">
         <button type="submit" class="btn btn-primary" ><span class="fa fa-add">ADD</span></button>
     </form>
+    
+
+    
 @endsection

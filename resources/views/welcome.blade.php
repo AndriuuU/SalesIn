@@ -87,6 +87,9 @@
                 <div class="links">
                     <a href="{{ url('/admin') }}">Admin</a>
                 </div>
+                <div class="links">
+                    <a href="{{ url('/noticias') }}">Noticias</a>
+                </div>
                 @endauth 
             </div>
         </div>

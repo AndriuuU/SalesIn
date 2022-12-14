@@ -76,5 +76,35 @@ class ArticlesController extends Controller
         return redirect($this->redirectPath())->with('message', 'Se insertó correctamente');
     }
 
+    public function editar(Articles $article)
+    {   
+        // $article = Auth::article();
+
+        return view('articles.edit');
+    }
+
+	public function update(Articles $article)
+    { 
+        
+        
+        $this->validate(request(), [
+				'title' => 'required|max:255|unique:users',
+				'image' => 'required|image|mimes:jpg,png,jpeg',	
+            ]);
+
+            $article->title = request('title');
+			$article->image = request('image');
+            $article->save();
+            // return back();
+            return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia actualizada correctamente');
+    }
+
+    public function eliminar(Articles $article) {
+		$article = Articles::find($article->id);
+        $article->deleted = 1;
+        $article->update();
+
+        return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia eliminado correctamente');
+    }
     
 }
