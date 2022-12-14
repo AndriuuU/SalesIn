@@ -25,12 +25,11 @@ Route::POST('/admin/elimi/{user}', 'AdminController@eliminar')->name('user.delet
 Route::get('/admin/valid/{user}', 'AdminController@validar')->name('user.valid');;
 Route::get('/edit/', [ 'as' => 'users.edit', 'uses' => 'AdminController@editar']);
 // Route::get('/admin/edit/{user}', 'AdminController@editar')->name('user.edit');
-//Route::post('', 'AdminController@eliminar');
 
 Route::resource('/noticias', 'ArticlesController');
 Route::get('/noticias', 'ArticlesController@index');
 Route::get('/noticias', 'ArticlesController@index')->name('articles.index');
-Route::POST('/noticias/elimi/{article}', 'ArticlesController@eliminar')->name('article.delete');
+Route::POST('/noticias/elimi/{article}', 'ArticlesController@eliminar')->name('articles.delete');
 Route::get('/edit/', [ 'as' => 'articles.edit', 'uses' => 'ArticlesController@editar']);
 
 Route::get('profile', function () {

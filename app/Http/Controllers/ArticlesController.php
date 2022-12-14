@@ -106,5 +106,13 @@ class ArticlesController extends Controller
             
     //     }
     // }
+
+    public function eliminar(Articles $article) {
+		$article = Articles::find($article->id);
+        $article->deleted = 1;
+        $article->update();
+
+        return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia eliminado correctamente');
+    }
     
 }
