@@ -25,16 +25,36 @@ class ArticlesController extends Controller
         return view('articles.create', compact('cicles'));
     }
 
-	protected function add(Request $request)
+	protected function store(Request $request)
     {
+        // $file = request()->file('image')->store('public');
         
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+    
+           ]);
+        $file = $request -> file('image');
+        $file2 = $request->$file->store('public/images');
+        
+        \Storage::disk("image")->put($name, \File::get($file));
+        // if (request()->hasFile('image')) {
+        //     $file = request()->file('image')->store('public/images');
+        //     $articles = new Articles;   
+        //     $articles->title         = $request->get('title');
+        //     $articles->description = $request->get('description');
+        //     $articles->cicle_id     = $request->get('cicle_id');
+        //     $articles->image = $file;
+        //     $articles.save();
+        // }
         return Articles::create([
             'title' => $request['title'],
-            'image' => $request['image'],
+            'image' => $file2,
             'description' => $request['description'],
             'cicle_id' => $request['cicle_id'],
         ]);
+        return  back()->with('status', 'Image Has been uploaded')->with('image',$name);
     }
+
 
 	protected function validator(Request $request)
     {   

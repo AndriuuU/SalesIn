@@ -17,6 +17,11 @@
             <input name="title" type="text" class="form-control" id="inputtitle" placeholder="Title article">
             </div>
         </div>
+            @error('title')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         
         <div class="form-group row">
             <label for="inputDescription" class="col-sm-2 col-form-label text-md-right">Description</label>
@@ -24,6 +29,11 @@
             <input name="description" type="text" class="form-control" id="inputDescription" placeholder="Description the article">
             </div>
         </div>
+            @error('description')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
 
         <div class="form-group row">
             <label for="cicle_id" class="col-sm-2 col-form-label text-md-right">{{ __('Cicle') }}</label>
