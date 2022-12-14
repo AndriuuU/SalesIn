@@ -29,7 +29,8 @@
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Imagen') }}</label>
 
                             <div class="col-md-6">
-                                <input id="file" type="image" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
+                                <label for="image">Elige una imagen para la noticia:</label>
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
                                 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
