@@ -56,5 +56,55 @@ class ArticlesController extends Controller
         return redirect($this->redirectPath())->with('message', 'Se insertó correctamente');
     }
 
+    // public function editar(Article $article)
+    // {   
+    //     $article = Auth::article();
+
+    //     return view('articles.edit');
+    // }
+
+	// public function update(User $user)
+    // { 
+    //     if(Auth::user()->email == request('email')) {
+        
+    //     $this->validate(request(), [
+	// 			'name' => 'required|max:255|unique:users',
+	// 			'surname' => 'required|max:255|unique:users',
+	// 			'cicle_id' => 'required',
+	// 		 	'email' => 'required|email|max:255|unique:users',
+	// 			'password' => 'required|min:8|confirmed'	
+    //         ]);
+
+    //         $user->name = request('name');
+	// 		$user->surname = request('surname');
+	// 		$user->cicle_id = request('cicle_id');
+    //         $user->email = request('email');
+    //         $user->password = bcrypt(request('password'));
+    //         $user->save();
+    //         return back();
+            
+    //     }
+    //     else{
+            
+    //     $this->validate(request(), [
+	// 			'name' => 'required|max:255|unique:users',
+	// 			'surname' => 'required|max:255|unique:users',
+	// 			'cicle_id' => 'required',
+	// 			'email' => 'email|required|unique:users,email,'.$this->segment(2),
+	// 			'password' => 'required|min:8|confirmed'
+    //         ]);
+
+	// 		$user->name = request('name');
+	// 		$user->surname = request('surname');
+	// 		$user->cicle_id = request('cicle_id');
+    //         $user->email = request('email');
+    //         $user->password = bcrypt(request('password'));
+
+    //         $user->save();
+
+    //         return back();  
+            
+    //     }
+    // }
     
 }
