@@ -67,6 +67,7 @@
 
                             <div class="col-md-6">
                                 <label for="image">Elige una imagen para la noticia:</label>
+                                <img src="{{ asset('images/'.$article->image) }}" width=150px height=150px>
                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
                                 
                                 @error('image')

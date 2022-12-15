@@ -103,7 +103,7 @@ class ArticlesController extends Controller
 			$article->image = request('image');
             $article->save();
             // return back();
-            return redirect()->index()->with('message','FELICIDADES! Noticia actualizada correctamente');
+        return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia actualizada correctamente');
     }
 
     public function eliminar(Articles $article) {
