@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Articles;
 use App\Cicles;
 use WithFileUploads;
@@ -29,30 +30,61 @@ class ArticlesController extends Controller
     {
         // $file = request()->file('image')->store('public');
         
-        $validatedData = $request->validate([
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        // $validatedData = $request->validate([
+        //     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
     
-           ]);
-        $file = $request -> file('image');
-        $file2 = $request->$file->store('public/images');
+        //    ]);
+        // $file = $request -> file('image');
+        // $file2 = $request->$file->store('public/images');
         
-        \Storage::disk("image")->put($name, \File::get($file));
-        // if (request()->hasFile('image')) {
-        //     $file = request()->file('image')->store('public/images');
-        //     $articles = new Articles;   
-        //     $articles->title         = $request->get('title');
-        //     $articles->description = $request->get('description');
-        //     $articles->cicle_id     = $request->get('cicle_id');
-        //     $articles->image = $file;
-        //     $articles.save();
-        // }
-        return Articles::create([
-            'title' => $request['title'],
-            'image' => $file2,
-            'description' => $request['description'],
-            'cicle_id' => $request['cicle_id'],
+        // \Storage::disk("image")->put($name, \File::get($file));
+
+        $this->validate(request(), [
+            'title' => 'required|max:255|unique:articles', //Creo que lo de unico hay que quitarlo (NO SE)
+            'description' =>'required|max:255',
+            'cicle_id' => 'required',
+            // 'image' => 'required|image|mimes:jpg,png,jpeg',	
         ]);
-        return  back()->with('status', 'Image Has been uploaded')->with('image',$name);
+        $article = new Articles; 
+        $article->title         = $request->get('title');
+        $article->description = $request->get('description');
+        $article->cicle_id     = $request->get('cicle_id');
+        
+
+        //obtenemos el campo file definido en el formulario
+        $file = $request->file('image');
+
+    //    //obtenemos el nombre del archivo
+       $nombre = $request->get('title');
+            $nombreImage = Str::slug($request->title).".".$file->guessExtension();
+            $ruta = public_path("images/");
+            $file->move($ruta, $nombreImage);
+    //    //indicamos que queremos guardar un nuevo archivo en el disco local
+    //    \Storage::disk('images')->put($nombre,\File::get($file));
+        $article->image     = $nombreImage;
+        // if (request()->hasFile('image')) {
+        //     $imagen =$request->file("image");
+        //     $nombreImage = Str::slug($request->title).".".$imagen->guessExtension();
+        //     $ruta = public_path("images/");
+        //     $imagen->move($ruta, $nombreImage);
+        //     // copy($imagen->getRealPath(),$ruta.$nombreImage);
+        //     // $file = request()->file('image')->store('public/images');
+
+        //     $article->image = $nombreImage;
+           
+        // }
+
+        $article->save();
+        // return Articles::create([
+        //     'title' => $request['title'],
+        //     'image' => $file2,
+        //     'description' => $request['description'],
+        //     'cicle_id' => $request['cicle_id'],
+        // ]);
+        // return  back();
+        // return  back()->with('status', 'Image Has been uploaded')->with('image',$name);
+        return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia creada correctamente');
+
     }
 
 

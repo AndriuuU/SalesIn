@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <form action="{{route('articles.add')}}" method="POST">
+    <form action="{{route('articles.add')}}" method="POST" accept-charset="UTF-8"enctype="multipart/form-data">
         @csrf
         @METHOD("POST")
         <div class="form-group row">

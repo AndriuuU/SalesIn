@@ -42,7 +42,7 @@ Route::get('profile', function () {
 
 Route::get('/noticias', 'ArticlesController@index');
 Route::get('/noticias/create', 'ArticlesController@create')->name('articles.create');
-Route::post('/noticiasd/create/add', 'ArticlesController@store')->name('articles.add');
+Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.add');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
