@@ -27,7 +27,7 @@ Route::get('/edit/', [ 'as' => 'users.edit', 'uses' => 'AdminController@editar']
 // Route::get('/admin/edit/{user}', 'AdminController@editar')->name('user.edit');
 
 Route::resource('/noticias', 'ArticlesController');
-Route::get('/noticias', 'ArticlesController@index');
+Route::resource('articles','ArticlesController');
 Route::get('/noticias', 'ArticlesController@index')->name('articles.index');
 Route::POST('/noticias/elimi/{article}', 'ArticlesController@eliminar')->name('articles.delete');
 // Route::get('/edit/', [ 'as' => 'articles.edit', 'uses' => 'ArticlesController@editar']);
