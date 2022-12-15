@@ -58,9 +58,10 @@
 
         <div class="form-group row">
 
-            <label for="image" class="col-sm-2 col-form-label text-md-right">File:</label>
+            
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="image" wire:model="image">
+                <label for="image">Elige una imagen para la noticia:</label>
+                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
 
             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
         </div>
@@ -68,7 +69,7 @@
         </br>
         <div class="col-sm-2 col-form-label text-md-right">
             <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </div>
     </form>
