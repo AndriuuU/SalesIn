@@ -8,16 +8,53 @@
                 <div class="card-header">{{ __('Editar noticia') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('articles.edit') }}">
+                    <form method="POST" action="{{ route('articles.update', [$article->id])}}">
                         @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Titulo') }}</label>
-
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{$article->title}}" required autocomplete="title" autofocus>
 
                                 @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                            <div class="col-md-6">
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{$article->description}}" required autocomplete="description" autofocus>
+
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cicle_id" class="col-md-4 col-form-label text-md-right">{{ __('Cicle') }}</label>
+
+                            <div class="col-md-6">
+
+                                <select name="cicle_id" class="form-control @error('email') is-invalid @enderror" name="cicle_id" value="{{ old('cicle_id') }}">>
+                                    @foreach($cicles as $cicle)
+                                    @if($cicle->id==$article->cicle_id)
+                                        <option value="{{ $cicle->id }}">{{ $cicle->name }}</option>
+                                    @endif
+                                    @endforeach
+                                    @foreach($cicles as $cicle)
+                                        <option value="{{ $cicle->id }}">{{ $cicle->name }}</option>
+                                        
+                                    @endforeach
+                                </select>
+
+                                @error('cicle_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

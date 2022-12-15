@@ -30,7 +30,9 @@ Route::resource('/noticias', 'ArticlesController');
 Route::get('/noticias', 'ArticlesController@index');
 Route::get('/noticias', 'ArticlesController@index')->name('articles.index');
 Route::POST('/noticias/elimi/{article}', 'ArticlesController@eliminar')->name('articles.delete');
-Route::get('/edit/', [ 'as' => 'articles.edit', 'uses' => 'ArticlesController@editar']);
+// Route::get('/edit/', [ 'as' => 'articles.edit', 'uses' => 'ArticlesController@editar']);
+Route::get('/noticias/edit/{article}', 'ArticlesController@editar')->name('articles.edit');
+Route::post('/noticias/edit/{article}/confir', 'ArticlesController@update')->name('articles.update');
 
 Route::get('profile', function () {
     // Only verified users may enter...
@@ -40,7 +42,7 @@ Route::get('profile', function () {
 
 Route::get('/noticias', 'ArticlesController@index');
 Route::get('/noticias/create', 'ArticlesController@create')->name('articles.create');
-Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.add');
+Route::post('/noticiasd/create/add', 'ArticlesController@store')->name('articles.add');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 

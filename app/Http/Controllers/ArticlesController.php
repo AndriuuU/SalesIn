@@ -79,8 +79,11 @@ class ArticlesController extends Controller
     public function editar(Articles $article)
     {   
         // $article = Auth::article();
-
-        return view('articles.edit');
+        
+        $article=Articles::find($article->id);
+        $cicles=cicles::all();
+        return view('articles.edit', compact('article','cicles'));
+        //return view('articles.edit');
     }
 
 	public function update(Articles $article)
@@ -88,15 +91,19 @@ class ArticlesController extends Controller
         
         
         $this->validate(request(), [
-				'title' => 'required|max:255|unique:users',
-				'image' => 'required|image|mimes:jpg,png,jpeg',	
+				'title' => 'required|max:255|unique:articles', //Creo que lo de unico hay que quitarlo (NO SE)
+                'description' =>'required|max:255',
+                'cicle_id' => 'required',
+				// 'image' => 'required|image|mimes:jpg,png,jpeg',	
             ]);
 
             $article->title = request('title');
+            $article->description = request('description');
+            $article->cicle_id = request('cicle_id');
 			$article->image = request('image');
             $article->save();
             // return back();
-            return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia actualizada correctamente');
+            return redirect()->index()->with('message','FELICIDADES! Noticia actualizada correctamente');
     }
 
     public function eliminar(Articles $article) {
