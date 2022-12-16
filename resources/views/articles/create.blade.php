@@ -15,25 +15,29 @@
             <label for="inputtitle" class="col-sm-2 col-form-label text-md-right">Title</label>
             <div class="col-sm-10">
             <input name="title" type="text" class="form-control" id="inputtitle" placeholder="Title article">
-            </div>
-        </div>
             @error('title')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+            </div>
+        </div>
+           
         
         <div class="form-group row">
             <label for="inputDescription" class="col-sm-2 col-form-label text-md-right">Description</label>
             <div class="col-sm-10">
             <input name="description" type="text" class="form-control" id="inputDescription" placeholder="Description the article">
-            </div>
-        </div>
+            
             @error('description')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+
+            </div>
+        </div>
+            
 
         <div class="form-group row">
             <label for="cicle_id" class="col-sm-2 col-form-label text-md-right">{{ __('Cicle') }}</label>
@@ -63,7 +67,11 @@
                 <label for="image">Elige una imagen para la noticia:</label>
                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
 
-            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                @error('image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
         </div>
         </div>
         </br>

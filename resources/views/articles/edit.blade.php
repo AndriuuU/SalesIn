@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Editar noticia') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('articles.update', [$article->id])}}">
+                    <form method="POST" action="{{ route('articles.update', [$article->id])}}" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

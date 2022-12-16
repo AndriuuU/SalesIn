@@ -28,17 +28,7 @@ class ArticlesController extends Controller
 
 	protected function store(Request $request)
     {
-        // $file = request()->file('image')->store('public');
-        
-        // $validatedData = $request->validate([
-        //     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-    
-        //    ]);
-        // $file = $request -> file('image');
-        // $file2 = $request->$file->store('public/images');
-        
-        // \Storage::disk("image")->put($name, \File::get($file));
-
+       
         $this->validate(request(), [
             'title' => 'required|max:255|unique:articles', //Creo que lo de unico hay que quitarlo (NO SE)
             'description' =>'required|max:255',
@@ -50,39 +40,17 @@ class ArticlesController extends Controller
         $article->description = $request->get('description');
         $article->cicle_id     = $request->get('cicle_id');
         
-
-        //obtenemos el campo file definido en el formulario
         $file = $request->file('image');
 
-    //    //obtenemos el nombre del archivo
-       $nombre = $request->get('title');
-            $nombreImage = Str::slug($request->title).".".$file->guessExtension();
-            $ruta = public_path("images/");
-            $file->move($ruta, $nombreImage);
-    //    //indicamos que queremos guardar un nuevo archivo en el disco local
-    //    \Storage::disk('images')->put($nombre,\File::get($file));
-        $article->image     = $nombreImage;
-        // if (request()->hasFile('image')) {
-        //     $imagen =$request->file("image");
-        //     $nombreImage = Str::slug($request->title).".".$imagen->guessExtension();
-        //     $ruta = public_path("images/");
-        //     $imagen->move($ruta, $nombreImage);
-        //     // copy($imagen->getRealPath(),$ruta.$nombreImage);
-        //     // $file = request()->file('image')->store('public/images');
+        $nombre = $request->get('title');
+        $nombreImage = Str::slug($request->title).".".$file->guessExtension();
+        $ruta = public_path("images/");
+        $file->move($ruta, $nombreImage);
 
-        //     $article->image = $nombreImage;
-           
-        // }
+        $article->image = $nombreImage;
 
         $article->save();
-        // return Articles::create([
-        //     'title' => $request['title'],
-        //     'image' => $file2,
-        //     'description' => $request['description'],
-        //     'cicle_id' => $request['cicle_id'],
-        // ]);
-        // return  back();
-        // return  back()->with('status', 'Image Has been uploaded')->with('image',$name);
+
         return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia creada correctamente');
 
     }
@@ -118,12 +86,11 @@ class ArticlesController extends Controller
         //return view('articles.edit');
     }
 
-	public function update(Articles $article)
+	public function update(Articles $article,Request $request)
     { 
         
-        
         $this->validate(request(), [
-				'title' => 'required|max:255|unique:articles', //Creo que lo de unico hay que quitarlo (NO SE)
+				'title' => 'required|max:255', //Creo que lo de unico hay que quitarlo (NO SE)
                 'description' =>'required|max:255',
                 'cicle_id' => 'required',
 				// 'image' => 'required|image|mimes:jpg,png,jpeg',	
@@ -132,7 +99,22 @@ class ArticlesController extends Controller
             $article->title = request('title');
             $article->description = request('description');
             $article->cicle_id = request('cicle_id');
-			$article->image = request('image');
+			
+            $file = $article->image;
+            $ruta = public_path("images/");
+            if (@getimagesize("images/".$file)) {
+                unlink("images/".$file);
+            }
+            $fileCopy=$request->file('image');
+            $nombreImage = Str::slug($request->title).".".$fileCopy->guessExtension();
+            $fileCopy->move($ruta, $nombreImage);
+            // $nombre = request('title');
+            // $nombreImage = Str::slug($nombre).".".$file->guessExtension();
+            // $ruta = public_path("images/");
+            // $file->move($ruta, $nombreImage);
+
+            $article->image = request('image');
+
             $article->save();
             // return back();
         return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia actualizada correctamente');
