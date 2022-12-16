@@ -14,7 +14,7 @@ class ArticlesController extends Controller
 
     public function index(Request $request){
 
-        $articles=Articles::paginate(5);
+        $articles=Articles::paginate(10);
 		return view('articles.index', compact('articles'));
 		// return view('articles.index');
 		
@@ -102,9 +102,12 @@ class ArticlesController extends Controller
 			
             $file = $article->image;
             $ruta = public_path("images/");
-            if (@getimagesize("images/".$file)) {
-                unlink("images/".$file);
+            if($request->image!=Null){
+                if (@getimagesize("images/".$file)) {
+                    unlink("images/".$file);
+                }
             }
+           
             $fileCopy=$request->file('image');
             $nombreImage = Str::slug($request->title).".".$fileCopy->guessExtension();
             $fileCopy->move($ruta, $nombreImage);
@@ -122,6 +125,10 @@ class ArticlesController extends Controller
 
     public function eliminar(Articles $article) {
 		$article = Articles::find($article->id);
+        $file = $article->image;
+        if (@getimagesize("images/".$file)) {
+            unlink("images/".$file);
+        }
         $article->deleted = 1;
         $article->update();
 

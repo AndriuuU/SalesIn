@@ -13,14 +13,16 @@
         <tr>
             <th>Id</th>
             <th>Titulo</th>
+            <th>Description</th>
             <th>Imagenes</th>
             <th> Botones </th>
         </tr>
-        @foreach ($articles as $article)
+        @forelse ($articles as $article)
         @if($article-> deleted==0)
         <tr>
             <td>{{ $article->id  }}</td>
             <td>{{ $article->title }} </td>
+            <td>{{ $article->description }}</td>
             <td><img src="{{ asset('images/'.$article->image) }}" width=150px height=150px></td>
             <td>
                 <form action="{{route('articles.delete', [$article->id])}}" method="POST">                                        
@@ -32,7 +34,13 @@
 
         </tr>
         @endif
-        @endforeach
+        @empty
+        <div class="alert alert-danger">
+            {{ __("No hay noticias en este momento")}}
+        </div> 
+        @endforelse
+        
+
     </table>
     <div class="card-footer mr-auto">
         {{$articles->links()}}

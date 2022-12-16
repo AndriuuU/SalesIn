@@ -42,7 +42,7 @@
         <div class="form-group row">
             <label for="cicle_id" class="col-sm-2 col-form-label text-md-right">{{ __('Cicle') }}</label>
 
-            <div class="col-md-6">
+            <div class="col-md-10">
 
                 <select name="cicle_id" class="form-control @error('email') is-invalid @enderror" name="cicle_id" value="{{ old('cicle_id') }}">>
                     <option value="">Select Cicle</option>
@@ -61,8 +61,8 @@
 
 
         <div class="form-group row">
+            <label for="image" class="col-md-2 col-form-label text-md-right">{{ __('Imagen') }}</label>
 
-            
             <div class="col-sm-10">
                 <label for="image">Elige una imagen para la noticia:</label>
                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" accept="image/png, image/jpeg">
@@ -72,10 +72,10 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-        </div>
+            </div>
         </div>
         </br>
-        <div class="col-sm-2 col-form-label text-md-right">
+        <div class="col-sm-4 col-form-label text-md-right">
             <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Create</button>
             </div>
