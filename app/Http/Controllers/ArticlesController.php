@@ -90,7 +90,7 @@ class ArticlesController extends Controller
     { 
         
         $this->validate(request(), [
-				'title' => 'required|max:255', //Creo que lo de unico hay que quitarlo (NO SE)
+				'title' => 'required|max:255', 
                 'description' =>'required|max:255',
                 'cicle_id' => 'required',
 				// 'image' => 'required|image|mimes:jpg,png,jpeg',	
@@ -113,7 +113,7 @@ class ArticlesController extends Controller
             // $ruta = public_path("images/");
             // $file->move($ruta, $nombreImage);
 
-            $article->image = request('image');
+            $article->image = $nombreImage;
 
             $article->save();
             // return back();
