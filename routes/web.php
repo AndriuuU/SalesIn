@@ -46,4 +46,8 @@ Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+//ofertas
+Route::get('/ofertas', 'OffersController@index');
+
+
 Auth::routes();
