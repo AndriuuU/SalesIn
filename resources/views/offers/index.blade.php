@@ -14,6 +14,7 @@
             <th>Imagenes</th>
             <th>Titulo</th>
             <th>Funciones</th>
+
             
         </tr>
         @forelse ($offers as $offer)
@@ -28,6 +29,7 @@
             </td>
         
             <td>{{ $offer->title }} </td>
+            <!-- <td>{{ $offer->description }} </td> -->
             <td>
                 @if ($offer->actived==0)
                     <a class="btn btn-success-outline" href=""><span class="fa fa-check"></a>
@@ -43,6 +45,7 @@
        
         
         @empty
+
         <div class="alert alert-danger">
             {{ __("No hay noticias en este momento")}}
         </div> 

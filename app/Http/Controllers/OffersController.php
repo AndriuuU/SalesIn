@@ -25,7 +25,8 @@ class OffersController extends Controller
     public function aplicar(Request $request,Offers $id){
         $user = $request->user();
         $applied = Applieds::all();
-        if($user->actived == 0){
+
+        if($applied->offer_id() == $id){
 
 			if($user->email_verified_at!=null){
 				$user->actived = 1;
