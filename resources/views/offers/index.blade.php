@@ -21,7 +21,7 @@
             
             <td>{{ $offer->title }} </td>
             <td>
-                
+                <a href="{{ route('pdf') }}">Generar PDF</a> 
             </td>
 
         </tr>

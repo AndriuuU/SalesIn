@@ -90,6 +90,9 @@
                 <div class="links">
                     <a href="{{ url('/noticias') }}">Noticias</a>
                 </div>
+                <div class="links">
+                    <a href="{{ url('/ofertas') }}">Ofertas</a>
+                </div>
                 @endauth 
             </div>
         </div>
