@@ -48,6 +48,9 @@ Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.
 
 //ofertas
 Route::get('/ofertas', 'OffersController@index');
+Route::post('/ofertas/aplicar/{offer}', 'OffersController@aplicar');
+Route::get('pdf', 'InformesController@prueba')->name('pdf');
+
 
 
 Auth::routes();
