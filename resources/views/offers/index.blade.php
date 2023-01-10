@@ -36,7 +36,7 @@
                 @else
                     <a class="btn btn-success" href=""><i class="fa fa-pause-circle"></i></a>
                 @endif
-                <a href="{{ route('pdf') }}">Generar PDF</a> 
+                
             </td>
 
             </tr>

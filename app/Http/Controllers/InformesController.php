@@ -12,8 +12,8 @@ class InformesController extends Controller
     $data = [
         'titulo' => 'Styde.net'
     ];
-
-    return PDF::loadView('prueba', $data)
+    
+    return PDF::loadView('pdf', $data)
         ->stream('archivo.pdf');
 }
 
