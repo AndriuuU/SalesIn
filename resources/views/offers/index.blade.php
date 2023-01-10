@@ -13,6 +13,7 @@
         <tr>
             
             <th>Titulo</th>
+            <!-- <th>Descripcion</th>  -->
             
         </tr>
         @forelse ($offers as $offer)
@@ -20,6 +21,7 @@
         <tr>
             
             <td>{{ $offer->title }} </td>
+            <!-- <td>{{ $offer->description }} </td> -->
             <td>
                 
             </td>
@@ -27,6 +29,7 @@
         </tr>
         @endif
         @empty
+
         <div class="alert alert-danger">
             {{ __("No hay noticias en este momento")}}
         </div> 
