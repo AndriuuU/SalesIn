@@ -31,10 +31,10 @@ class OffersController extends Controller
 			
 				return redirect()->route('users.index')->with('message', 'FELICIDADES! Usuario Validado correctamente');
 				
-			}else{
+			
 				return redirect()->route('users.index')->with('messageError', 'ERROR!!! Usuario No ha verificado el correo');
-			}
-		}else {
+			
+		
 			$user->actived = 0;
 			$user->update();
 			return redirect()->route('users.index')->with('message', 'FELICIDADES! Usuario desvalidado correctamente');
