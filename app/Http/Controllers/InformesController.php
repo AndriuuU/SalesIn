@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class InformesController extends Controller
 {
-    use PDF;
+    public function download()
+{
+    $data = [
+        'titulo' => 'Styde.net'
+    ];
 
-	public function general() {
-        $pdf = \PDF::loadView('prueba');
-        // Para crear un pdf en el navegador usaremos la siguiente línea
-        return $pdf->stream();
-        // Para descargar un pdf en un archivo usaremos la siguiente línea
-        return $pdf->download('prueba.pdf');
-    }
+    return PDF::loadView('prueba', $data)
+        ->stream('archivo.pdf');
+}
 
 }
