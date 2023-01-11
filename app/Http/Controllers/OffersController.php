@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Cicles;
 use App\Offers;
-use App\Applieds;
+use App\Applied;
 use WithFileUploads;
 
 class OffersController extends Controller
@@ -15,29 +15,30 @@ class OffersController extends Controller
 
     public function index(Request $request){
 
-        $offers=Offers::paginate(10);
         $cicles=cicles::all();
-		return view('offers.index', compact('offers','cicles'));
+		$applies=Applied::where('user_id','!=',auth()->id())->with(['offer'])->paginate(10);
+		return view('users.offers.index', compact('cicles','applies'));
 
 	}
     
 
     public function aplicar(Request $request,Offers $id){
         $user = $request->user();
-        $applied = Applieds::all();
+        $applied = Applied::all();
 
         if($applied->offer_id == $id && $applied->user_id == $user){
 
 			
-				return redirect()->route('users.index')->with('message', 'FELICIDADES! Usuario Validado correctamente');
+				return redirect()->route('offers.index')->with('message', 'FELICIDADES! Oferta aplicada correctamente');
 				
 			
-				return redirect()->route('users.index')->with('messageError', 'ERROR!!! Usuario No ha verificado el correo');
+				return redirect()->route('offers.index')->with('messageError', 'ERROR!!! Oferta no aplicada');
 			
 		
 			$user->actived = 0;
-			$user->update();
-			return redirect()->route('users.index')->with('message', 'FELICIDADES! Usuario desvalidado correctamente');
+			$offer->deleted = 1;
+			$offer->update();
+			return redirect()->route('offers.index');
 		}
 
         
