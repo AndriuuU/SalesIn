@@ -8,7 +8,13 @@
         </div>
     </div>
 	<br>
-
+    @if ($message = Session::get('message'))
+       
+       <div class="alert alert-success">
+           <p>{{ $message }}</p>
+       </div>
+   @endif
+   <br>
     <table class="table table-bordered">
         <tr>
             <th>Imagenes</th>
@@ -17,47 +23,43 @@
 
             
         </tr>
+        
         @forelse ($offers as $offer)
         
-        @foreach ($cicles as $cicle)
-        @if($cicle-> deleted==0 && $offer->deleted==0)
-        @if($cicle-> id==$offer-> cicle_id)
         <tr>
-
-            <td>                    
-                <img src="{{ asset('images/cicles/'.$cicle->img) }}" width=50px height=50px>
+        @foreach ($cicles as $cicle)
+        @if ($offer->cicle_id == $cicle->id)
+            <td>
+                @if($cicle->img !="")
+                    <img src="{{ asset('images/cicles/'.$cicle->img) }}" width=50px height=50px>
+                @else
+                    no hay imagen
+                @endif
             </td>
-        
+        @endif
+        @endforeach
             <td>{{ $offer->title }} </td>
            
             <td>
-                @if ($offer->actived==0)
-                    <a class="btn btn-success-outline" href=""><span class="fa fa-check"></a>
-                @else
-                    <a class="btn btn-success" href=""><i class="fa fa-pause-circle"></i></a>
-                @endif
                 
+                <a class="btn btn-success-outline" href="{{route('offers.apli', [$offer->id])}}"><span class="fa fa-check"></a>
+                
+                 
             </td>
 
-            </tr>
-        @endif
-        @endif
-        @endforeach
+        </tr>
        
-        
         @empty
 
         <div class="alert alert-danger">
-            {{ __("No hay noticias en este momento")}}
+            {{ __("No hay ofertas en este momento")}}
         </div> 
         
         @endforelse
         
 
     </table>
-    <div class="card-footer mr-auto">
-        {{$offers->links()}}
-    </div>
+   
 
    
     
