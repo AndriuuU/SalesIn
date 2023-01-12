@@ -28,12 +28,12 @@
         
         <tr>
         @foreach ($cicles as $cicle)
-        @if ($offer->cicle_id == $cicle->id)
+        @if ($cicle->id == $offer->cicle_id)
             <td>
                 @if($cicle->img !="")
-                    <img src="{{ asset('images/cicles/'.$cicle->img) }}" width=50px height=50px>
+                    <img src="{{ asset('images/cicles/'.$cicle->img) }}" width=70px height=70px>
                 @else
-                    no hay imagen
+                    <img src="{{ asset('images/no-img.jpg' )}}" width=70px height=70px>
                 @endif
             </td>
         @endif

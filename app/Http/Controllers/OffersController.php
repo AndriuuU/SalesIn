@@ -16,7 +16,7 @@ class OffersController extends Controller
     public function index(Request $request){
 
         $userId = auth()->id();
-        $offers = Offers::select('offers.id', 'offers.title', 'offers.description', 'offers.num_candidates', 'offers.created_at', 'offers.updated_at', 'offers.deleted', 'applieds.offer_id', 'applieds.user_id')
+        $offers = Offers::select('offers.id', 'offers.title', 'offers.description', 'offers.num_candidates','offers.cicle_id', 'offers.created_at', 'offers.updated_at', 'offers.deleted', 'applieds.offer_id', 'applieds.user_id')
                 ->leftJoin('applieds', function($join) use ($userId) {
                  $join->on('offers.id', '=', 'applieds.offer_id')
                       ->where('applieds.user_id', '=', $userId);
