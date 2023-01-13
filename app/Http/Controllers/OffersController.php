@@ -28,10 +28,20 @@ class OffersController extends Controller
         $cicles=cicles::all();
 		
 		$applies=Applied::where('user_id','!=',auth()->id())->with(['offer'])->paginate(10);
-		return view('users.offers.index', compact('cicles','applies'));
+		return view('offers.index', compact('cicles','applies'));
 
 	}
     
+    public function download()
+	{
+		$data = [
+			'titulo' => 'Styde.net'
+		];
+		
+		return PDF::loadView('pdf', $data)
+			->stream('archivo.pdf');
+        return redirect()->route('offers.index')->with('message','Oferta guardada con exito');
+	}
 
     public function aplicar(Request $request,Offers $offer){
         $user = $request->user();
@@ -79,19 +89,7 @@ class OffersController extends Controller
 		}
 
         
-		return view('offers.index', compact('offers','cicles'));
+		// return view('offers.index', compact('offers','cicles'));
 
 	}
 
-	public function download()
-	{
-		$data = [
-			'titulo' => 'Styde.net'
-		];
-		
-		return PDF::loadView('pdf', $data)
-			->stream('archivo.pdf');
-        return redirect()->route('offers.index')->with('message','Oferta guardada con exito');
-	}
-
-}
