@@ -16,18 +16,54 @@ class OffersController extends Controller
 
     public function index(Request $request){
 
+        $userId = auth()->id();
+        $offers = Offers::select('offers.id', 'offers.title', 'offers.description', 'offers.num_candidates','offers.cicle_id', 'offers.created_at', 'offers.updated_at', 'offers.deleted', 'applieds.offer_id', 'applieds.user_id')
+                ->leftJoin('applieds', function($join) use ($userId) {
+                 $join->on('offers.id', '=', 'applieds.offer_id')
+                      ->where('applieds.user_id', '=', $userId);
+              })
+              ->whereNull('applieds.id')
+              ->where('offers.deleted', 0)
+              ->get();
         $cicles=cicles::all();
+		
 		$applies=Applied::where('user_id','!=',auth()->id())->with(['offer'])->paginate(10);
 		return view('users.offers.index', compact('cicles','applies'));
 
 	}
     
 
-    public function aplicar(Request $request,Offers $id){
+    public function aplicar(Request $request,Offers $offer){
         $user = $request->user();
-        $applied = Applied::all();
+		$oferta = Offers::find($offer->id);
+        //$applied = Applied::all();
+		
+		
+        $appliednew = new Applied; 
+        $appliednew->offer_id = $oferta->id;
+        $appliednew->user_id = $user->id;
+        
+		$appliednew->save();
 
-        if($applied->offer_id == $id && $applied->user_id == $user){
+		$oferta->num_candidates=1+$oferta->num_candidates;
+		$oferta->save();
+
+
+        // $userId = auth()->id();
+        // $offers = Offers::select('offers.id', 'offers.title', 'offers.description', 'offers.num_candidates', 'offers.created_at', 'offers.updated_at', 'offers.deleted', 'applieds.offer_id', 'applieds.user_id')
+        //         ->leftJoin('applieds', function($join) use ($userId) {
+        //          $join->on('offers.id', '=', 'applieds.offer_id')
+        //               ->where('applieds.user_id', '=', $userId);
+        //       })
+        //       ->whereNull('applieds.id')
+        //       ->where('offers.deleted', 0)
+        //       ->get();
+              
+        
+        // $cicles=cicles::all();
+
+
+        // if($applied->offer_id == $id && $applied->user_id == $user){
 
 			
 				return redirect()->route('offers.index')->with('message', 'FELICIDADES! Oferta aplicada correctamente');
@@ -55,6 +91,7 @@ class OffersController extends Controller
 		
 		return PDF::loadView('pdf', $data)
 			->stream('archivo.pdf');
+        return redirect()->route('offers.index')->with('message','Oferta guardada con exito');
 	}
 
 }

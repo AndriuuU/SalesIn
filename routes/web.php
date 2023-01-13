@@ -41,14 +41,14 @@ Route::get('profile', function () {
 // Noticias
 
 Route::get('/noticias', 'ArticlesController@index');
-Route::get('/noticias/create', 'ArticlesController@create')->name('articles.create');
+Route::post('/noticias/create', 'ArticlesController@create')->name('articles.create');
 Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.add');
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //ofertas
-Route::get('/ofertas', 'OffersController@index');
-Route::post('/ofertas/aplicar/{offer}', 'OffersController@aplicar');
+Route::get('/ofertas', 'OffersController@index')->name('offers.index');
+Route::get('/ofertas/aplicar/{offer}', 'OffersController@aplicar')->name('offers.apli');
 Route::get('pdf', 'OffersController@download')->name('pdf');
 
 
