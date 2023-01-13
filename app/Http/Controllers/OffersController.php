@@ -28,7 +28,7 @@ class OffersController extends Controller
         $cicles=cicles::all();
 		
 		$applies=Applied::where('user_id','!=',auth()->id())->with(['offer'])->paginate(10);
-		return view('offers.index', compact('cicles','applies'));
+		return view('offers.index', compact('offers','cicles'));
 
 	}
     
