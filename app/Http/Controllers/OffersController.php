@@ -8,6 +8,7 @@ use App\Cicles;
 use App\Offers;
 use App\Applied;
 use WithFileUploads;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class OffersController extends Controller
 {
@@ -45,4 +46,15 @@ class OffersController extends Controller
 		return view('offers.index', compact('offers','cicles'));
 
 	}
+
+	public function download()
+	{
+		$data = [
+			'titulo' => 'Styde.net'
+		];
+		
+		return PDF::loadView('pdf', $data)
+			->stream('archivo.pdf');
+	}
+
 }

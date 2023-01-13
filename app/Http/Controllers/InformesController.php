@@ -7,11 +7,6 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class InformesController extends Controller
 {
-
-    public function store(){
-        
-    }
-
     public function download()
 {
     $data = [
