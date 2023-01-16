@@ -10,7 +10,6 @@
 <p style="margin-left: 500px"> Apellido: {{$user->surname}}</p> 
 
 
-
 <table>
     <tr>
         <td>{{ $offer->title }} </td>
