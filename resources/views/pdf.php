@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Auth;
         <td>Título</td> 
         <td>Descripción</td> 
     </tr>
-    @foreach($offers as $offers)
+    @foreach($offers as $offer)
     <tr>
         <td>{{ $offer->title }}</td> 
         <td>{{ $offer->description }}</td> 
