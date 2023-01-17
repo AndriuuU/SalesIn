@@ -31,6 +31,12 @@ class OffersController extends Controller
 		return view('offers.index', compact('offers','cicles'));
 
 	}
+
+    public function show($id)
+    {
+        $offers = Offers::find($id);
+        return view('offers.show', ['offers' => $offers]);
+    }
     
     public function download()
 	{
