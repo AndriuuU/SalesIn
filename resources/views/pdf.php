@@ -18,22 +18,21 @@ use Illuminate\Support\Facades\Auth;
 <?php 
     $applieds = Applied::where('user_id', Auth::user()->id)->get();
     $offers = Offers::join('applieds','offers.id','=','applieds.offer_id')->where('applieds.user_id', Auth::user()->id)->get();
+    
+    echo "<h1>Ofertas aplicadas</h1>
+    <table>
+        <tr>
+            <td>Título</td> 
+            <td>Descripción</td> 
+        </tr>" ;
+        foreach($offers as $offer)
+        echo "<tr>
+            <td>" . $offer->titlen . "</td> 
+            <td>" . $offer->description . "</td> 
+        </tr>";
+    echo "</table>"
 ?>
-
-<h1>Ofertas aplicadas</h1>
-<table>
-    <tr>
-        <td>Título</td> 
-        <td>Descripción</td> 
-    </tr>
-    @foreach($offers as $offer)
-    <tr>
-        <td>{{ $offer->title }}</td> 
-        <td>{{ $offer->description }}</td> 
-    </tr>
-    @endforeach
-</table>
-
+    
 
 <!--bucle por la tabla 'applieds', 
     mira primero todas las ofertas con user id = user id del loggeado 
