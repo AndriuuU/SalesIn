@@ -20,7 +20,7 @@ rel="stylesheet"/>
 <div class="container">
 	<br>
 	<h2>Lista de ofertas</h2>
-    <a href="{{ route('pdf') }}">Generar PDF</a> 
+    
     @yield('content')
 </div>   
 </body>

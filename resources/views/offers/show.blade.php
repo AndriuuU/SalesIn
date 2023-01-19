@@ -7,7 +7,6 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('pdf') }}">Generar PDF</a> 
 	<br>
     @if ($message = Session::get('message'))
        
@@ -20,16 +19,16 @@
         <tr>
             <th>Imagenes</th>
             <th>Titulo</th>
-            <th>Funciones</th>
+            <th>descripcion</th>
+            <th>Fecha maxima</th>
+            <th>Cantidad</th>
+            <th>ciclo</th>
 
-            
         </tr>
-        
-        @forelse ($offers as $offer)
-        
+
         <tr>
         @foreach ($cicles as $cicle)
-        @if ($cicle->id == $offer->cicle_id)
+        @if ($cicle->id == $offers->cicle_id)
             <td>
                 @if($cicle->img !="")
                     <img src="{{ asset('images/cicles/'.$cicle->img) }}" width=70px height=70px>
@@ -37,34 +36,25 @@
                     <img src="{{ asset('images/no-img.jpg' )}}" width=70px height=70px>
                 @endif
             </td>
+        
+            <td>{{ $offers->title }} </td>
+            <td>{{$offers->description}}</td>
+            <td>{{$offers->date_max}}</td>
+            <td>{{$offers->num_candidates}}</td>
+            <td>{{$cicle->name}}</td>
+
         @endif
         @endforeach
-            <td>{{ $offer->title }} </td>
-           
-            <td>
-                <div>
-                <a class="btn btn-success-outline" href="{{route('offers.apli', [$offer->id])}}"><span class="fa fa-check"></a>
-</div>
-                <a class="btn btn-info-outline" href="{{route('offers.show', [$offer->id])}}"><span class="fa fa-check">Show</a>
-                
-                 
-            </td>
-
         </tr>
-       
-        @empty
-
-        <div class="alert alert-danger">
-            {{ __("No hay ofertas en este momento")}}
-        </div> 
         
-        @endforelse
         
 
     </table>
    
-    
+    <div>
+    <a class="btn btn-danger-outline" href="{{route('offers.index')}}"><span class="fa fa-arrow-left"> Return</a>
 
+    </div>
    
     
 

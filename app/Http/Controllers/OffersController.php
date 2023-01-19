@@ -86,10 +86,19 @@ class OffersController extends Controller
 			$offer->deleted = 1;
 			$offer->update();
 			return redirect()->route('offers.index');
-		}
+	}
 
         
 		// return view('offers.index', compact('offers','cicles'));
 
-	}
+	
 
+    public function show(Request $request,Offers $offer) {
+        $user = $request->user();
+        $offers=Offers::find($offer->id);
+        $cicles=cicles::all();
+		
+		return view('offers.show', compact('offers','cicles'));
+
+	}
+}

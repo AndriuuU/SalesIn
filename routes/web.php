@@ -49,6 +49,7 @@ Route::post('/noticias/create/add', 'ArticlesController@store')->name('articles.
 //ofertas
 Route::get('/ofertas', 'OffersController@index')->name('offers.index');
 Route::get('/ofertas/aplicar/{offer}', 'OffersController@aplicar')->name('offers.apli');
+Route::get('/ofertas/show/{offer}', 'OffersController@show')->name('offers.show');
 Route::get('pdf', 'OffersController@download')->name('pdf');
 
 
