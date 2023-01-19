@@ -9,6 +9,7 @@ use App\Offers;
 use App\Applied;
 use WithFileUploads;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class OffersController extends Controller
 {
@@ -31,7 +32,30 @@ class OffersController extends Controller
 		return view('offers.index', compact('offers','cicles'));
 
 	}
+
+    public function show($id)
+    {
+        $offers = Offers::find($id);
+        return view('offers.show', ['offers' => $offers]);
+    }
     
+    // public function download(Request $request)
+    // {
+    //     $email = $request->input('email');
+    //     $data = [
+    //         'titulo' => 'Styde.net'
+    //     ];
+
+    //     $pdf = PDF::loadView('pdf', $data);
+        
+    //     Mail::send('emails.pdf', [], function ($m) use ($email, $pdf) {
+    //         $m->to($email)->subject('Your PDF');
+    //         $m->attachData($pdf->output(), "archivo.pdf", [
+    //             'mime' => 'application/pdf',
+    //         ]);
+    //     });
+    // }
+
     public function download()
 	{
 		$data = [

@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function appliedOffers(){
+    public function applieds(){
         return $this->hasMany(Applied::class);
     }
 

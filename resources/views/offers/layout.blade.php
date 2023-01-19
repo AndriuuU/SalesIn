@@ -20,7 +20,6 @@ rel="stylesheet"/>
 <div class="container">
 	<br>
 	<h2>Lista de ofertas</h2>
-    
     @yield('content')
 </div>   
 </body>
