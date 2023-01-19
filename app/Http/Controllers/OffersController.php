@@ -33,11 +33,11 @@ class OffersController extends Controller
 
 	}
 
-    public function show($id)
-    {
-        $offers = Offers::find($id);
-        return view('offers.show', ['offers' => $offers]);
-    }
+    // public function show($id)
+    // {
+    //     $offers = Offers::find($id);
+    //     return view('offers.show', ['offers' => $offers]);
+    // }
     
     // public function download(Request $request)
     // {

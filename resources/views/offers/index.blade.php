@@ -7,8 +7,9 @@
             </div>
         </div>
     </div>
-    <a href="{{ route('pdf') }}">Generar PDF</a> 
-	<br>
+    <a href="{{ route('pdf') }}">Abrir PDF en el navegador.</a> 
+    <a href="{{ route('') }}">Enviar.</a> 
+    <br>
     @if ($message = Session::get('message'))
        
        <div class="alert alert-success">
