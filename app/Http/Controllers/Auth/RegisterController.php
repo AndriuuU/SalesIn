@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    public $successStatus = 200;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
