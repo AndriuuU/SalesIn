@@ -72,25 +72,46 @@ class PostManagementTest extends TestCase
 //     }
 
     /** @test */
+// public function crear_noticia_test() {
+
+
+//     $this->withoutExceptionHandling();
+
+//     // create a new user
+//     $user = factory(User::class)->create();
+
+//     // create article data
+//     $articleData = [
+//         'title' => 'Test Article',
+//         'description' => 'This is a test article',
+//     ];
+
+//     $response = $this->actingAs($user)
+//                      ->post('/noticias2', $articleData);
+
+//     $response->assertStatus(302);
+//     $this->assertDatabaseHas('articles', $articleData);
+
+// }
+
 public function crear_noticia_test() {
 
 
     $this->withoutExceptionHandling();
 
-    // create a new user
-    $user = factory(User::class)->create();
+    $response = $this->post('/noticias2', [
+        'title' => 'Título',
+        'description' => 'Contenido del test'
+    ]);
 
-    // create article data
-    $articleData = [
-        'title' => 'Test Article',
-        'description' => 'This is a test article',
-    ];
-
-    $response = $this->actingAs($user)
-                     ->post('/noticias', $articleData);
-
-    $response->assertStatus(302);
-    $this->assertDatabaseHas('articles', $articleData);
+    // Primero comprobamos que todo ha ido bien
+    $response->assertStatus(200);
+    // Comprobamos que hay 1 registro en la BD (se ha insertado)
+    $this->assertCount(1, Articles::all());
+    // Y comprobamos que sea el que acabamos de insertar
+    $article = Articles::first();
+    $this->assertEquals($article->title, 'Título del test');
+    $this->assertEquals($article->description, 'Contenido del test');
 
 }
 

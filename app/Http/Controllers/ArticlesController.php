@@ -30,9 +30,9 @@ class ArticlesController extends Controller
     {
        
         $this->validate(request(), [
-            'title' => 'required|max:255|unique:articles', //Creo que lo de unico hay que quitarlo (NO SE)
+            'title' => 'required|max:255', 
             'description' =>'required|max:255',
-            'cicle_id' => 'required',
+            'cicle_id' => '',
             // 'image' => 'required|image|mimes:jpg,png,jpeg',	
         ]);
         $article = new Articles; 

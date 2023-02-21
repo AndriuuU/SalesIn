@@ -52,6 +52,7 @@ Route::get('/ofertas/aplicar/{offer}', 'OffersController@aplicar')->name('offers
 Route::get('/ofertas/show/{offer}', 'OffersController@show')->name('offers.show');
 Route::get('pdf', 'OffersController@download')->name('pdf');
 
-
+//pruebas unitarias
+Route::post('/noticias2', 'ArticlesController@store');
 
 Auth::routes();
