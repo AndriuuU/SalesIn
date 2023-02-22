@@ -138,7 +138,7 @@ class ArticlesController extends Controller
         $article = Articles::find($id);
         $article->delete();
 
-        return redirect('/noticias2/');
+        return redirect('/noticias/');
 }
 
     

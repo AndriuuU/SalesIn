@@ -53,7 +53,7 @@ Route::get('/ofertas/show/{offer}', 'OffersController@show')->name('offers.show'
 Route::get('pdf', 'OffersController@download')->name('pdf');
 
 //pruebas unitarias
-Route::post('/noticias2', 'ArticlesController@store');
-Route::delete('/noticias2/{id}', 'ArticlesController@destroy');
+Route::post('/noticias', 'ArticlesController@store');
+Route::delete('/noticias/{id}', 'ArticlesController@destroy');
 
 Auth::routes();
