@@ -38,13 +38,13 @@ public function borrar_noticia_test() {
     //     'image' => $file
     // ]);
 
-    $article = factory(Articles::class)->create();
-
     // $article = new Articles;
     // $article->title = 'Titulo del test';
     // $article->description = 'Contenido del test';
     // $article->cicle_id = $cicle->id;
     // $article->image = $file;
+
+    $article = factory(Articles::class)->create();
 
     $response = $this->delete('/noticias/' . $article->id);
 

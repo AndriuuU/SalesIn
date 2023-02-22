@@ -140,6 +140,5 @@ class ArticlesController extends Controller
 
         return redirect('/noticias/');
 }
-
-    
+  
 }
