@@ -3,17 +3,19 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
 use App\articles;
+use App\Cicles;
 use Laravel\Passport\ClientRepository;
 
 class PostManagementTest extends TestCase
 {
     use RefreshDatabase;
-    // use DatabaseMigrations;
 
     /**
      * A basic test example.
@@ -71,65 +73,65 @@ class PostManagementTest extends TestCase
 
 //     }
 
-    /** @test */
+// /** @test */
 // public function crear_noticia_test() {
-
 
 //     $this->withoutExceptionHandling();
 
-//     // create a new user
-//     $user = factory(User::class)->create();
+//     $cicle = new Cicles;
+//     $cicle->name = 'Test';
+//     $cicle->img = 'Test.png';
+//     $cicle->save();
+    
+//     Storage::fake('articleImage');
+//     $file = UploadedFile::fake()->image('articleImage.jpg');
 
-//     // create article data
-//     $articleData = [
-//         'title' => 'Test Article',
-//         'description' => 'This is a test article',
-//     ];
+//     $response = $this->post('/noticias2', [
+//         'title' => 'Título del test',
+//         'description' => 'Contenido del test',
+//         'cicle_id' => $cicle->id,
+//         'image' => $file
+//     ]);
 
-//     $response = $this->actingAs($user)
-//                      ->post('/noticias2', $articleData);
-
+//     // Primero comprobamos que todo ha ido bien
 //     $response->assertStatus(302);
-//     $this->assertDatabaseHas('articles', $articleData);
-
+//     // Comprobamos que hay 1 registro en la BD (se ha insertado)
+//     $this->assertCount(1, Articles::all());
+//     // Y comprobamos que sea el que acabamos de insertar
+//     $article = Articles::first();
+//     $this->assertEquals($article->title, 'Título del test');
+//     $this->assertEquals($article->description, 'Contenido del test');
+//     $this->assertEquals($article->cicle_id, $cicle->id);
 // }
 
-public function crear_noticia_test() {
-
+/** @test */
+public function borrar_noticia_test() {
 
     $this->withoutExceptionHandling();
 
-    $response = $this->post('/noticias2', [
-        'title' => 'Título',
-        'description' => 'Contenido del test'
-    ]);
+    // $cicle = new Cicles;
+    // $cicle->name = 'Test';
+    // $cicle->img = 'Test.png';
+    // $cicle->save();
+    
+    // Storage::fake('articleImage');
+    // $file = UploadedFile::fake()->image('articleImage.jpg');
 
-    // Primero comprobamos que todo ha ido bien
-    $response->assertStatus(200);
-    // Comprobamos que hay 1 registro en la BD (se ha insertado)
-    $this->assertCount(1, Articles::all());
-    // Y comprobamos que sea el que acabamos de insertar
-    $article = Articles::first();
-    $this->assertEquals($article->title, 'Título del test');
-    $this->assertEquals($article->description, 'Contenido del test');
+    // $article = $this->post('/noticias2', [
+    //     'title' => 'Título del test',
+    //     'description' => 'Contenido del test',
+    //     'cicle_id' => $cicle->id,
+    //     'image' => $file
+    // ]);
 
+    $article = factory(Articles::class)->create();
+
+    $response = $this->delete('/noticias2/' . $article->id);
+
+    // Comprobamos que hay 0 registro en la BD (se ha insertado)
+    $this->assertCount(0, Articles::all());
+    $response->assertRedirect('/noticias2/');
+   
 }
-
-// /** @test */
-// public function borrar_noticia_test() {
-//     $this->withoutExceptionHandling();
-
-//     $article = Articles::create([
-//         'title' => 'Noticia prueba borrar',
-//         'description' => 'prueba borrar',
-//     ]);   
-
-//     $response = $this->delete('/noticias/' . $article->id);
-
-//     // Comprobamos que hay 0 registros en la BD (se ha insertado)
-//     $this->assertCount(0, Articles::all());
-
-//     $response->assertRedirect('/noticias/');
-// }
 
 }

@@ -41,8 +41,6 @@ class ArticlesController extends Controller
         $article->cicle_id     = $request->get('cicle_id');
         
         $file = $request->file('image');
-
-        $nombre = $request->get('title');
         $nombreImage = Str::slug($request->title).".".$file->guessExtension();
         $ruta = public_path("images/");
         $file->move($ruta, $nombreImage);
@@ -134,5 +132,14 @@ class ArticlesController extends Controller
 
         return redirect()->route('articles.index')->with('message','FELICIDADES! Noticia eliminado correctamente');
     }
+
+    public function destroy($id)
+{
+        $article = Articles::find($id);
+        $article->delete();
+
+        return redirect('/noticias2/');
+}
+
     
 }
