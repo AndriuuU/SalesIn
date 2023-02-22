@@ -24,22 +24,6 @@ class LoginTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        // $user = factory(User::class)->create([
-        //     'email' => 'emailprueba@gmail.com',
-        //     'password' => bcrypt('12345678'),
-        // ]);         
-    
-        // $clientRepository = new ClientRepository();
-        // $client = $clientRepository->createPersonalAccessClient(
-        //     null, 'Test Personal Access Client', 'http://localhost'
-        // );
-
-        // \DB::table('oauth_personal_access_clients')->insert([
-        //     'client_id' => $client->id,
-        //     'created_at' => new \DateTime,
-        //     'updated_at' => new \DateTime,
-        // ]);
-
         $cicle = new Cicles;
         $cicle->name = 'Test';
         $cicle->img = 'Test.png';
@@ -59,17 +43,9 @@ class LoginTest extends TestCase
             'password' => '12345678',
         ]);
 
-
-        // $this->assertAuthenticated();
-        // $this->assertNotNull(session('user_id'));
-        // $this->assertEquals($user->id, session('user_id'));
+        $response->assertStatus(302);
         $response->assertRedirect('/login');
-        $this->assertAuthenticatedAs($user);
-
-        // $response->assertStatus(200);
-        // $response->assertJsonStructure([
-        //     'success' => ['token']
-        // ]);
+        $response->assertCookie('XSRF-TOKEN');
 
     }
 

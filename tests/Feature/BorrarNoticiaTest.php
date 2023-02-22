@@ -38,8 +38,6 @@ public function borrar_noticia_test() {
     $article->image = $file;
     $article->save();
 
-    // $article = factory(Articles::class)->create();
-
     $response = $this->delete('/noticias/' . $article->id);
 
     // Comprobamos que hay 0 registro en la BD (se ha insertado)
