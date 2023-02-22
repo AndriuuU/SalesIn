@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
-use App\articles;
+use App\Articles;
 use App\Cicles;
 use Laravel\Passport\ClientRepository;
 
@@ -38,13 +38,14 @@ public function borrar_noticia_test() {
     //     'image' => $file
     // ]);
 
-    // $article = new Articles;
-    // $article->title = 'Titulo del test';
-    // $article->description = 'Contenido del test';
-    // $article->cicle_id = $cicle->id;
-    // $article->image = $file;
+    $article = new Articles;
+    $article->title = 'Titulo del test';
+    $article->description = 'Contenido del test';
+    $article->cicle_id = $cicle->id;
+    $article->image = $file;
+    $article->save();
 
-    $article = factory(Articles::class)->create();
+    // $article = factory(Articles::class)->create();
 
     $response = $this->delete('/noticias/' . $article->id);
 

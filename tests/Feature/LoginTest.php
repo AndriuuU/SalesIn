@@ -29,26 +29,29 @@ class LoginTest extends TestCase
             'password' => bcrypt('12345678'),
         ]);         
     
+        // $clientRepository = new ClientRepository();
+        // $client = $clientRepository->createPersonalAccessClient(
+        //     null, 'Test Personal Access Client', 'http://localhost'
+        // );
+
+        // \DB::table('oauth_personal_access_clients')->insert([
+        //     'client_id' => $client->id,
+        //     'created_at' => new \DateTime,
+        //     'updated_at' => new \DateTime,
+        // ]);
+
         $response = $this->post('/login', [
             'email' => 'emailprueba@gmail.com',
             'password' => '12345678',
         ]);
 
-        $clientRepository = new ClientRepository();
-        $client = $clientRepository->createPersonalAccessClient(
-            null, 'Test Personal Access Client', 'http://localhost'
-        );
+        $response->assertRedirect('/home');
+        $this->assertAuthenticatedAs($user);
 
-        \DB::table('oauth_personal_access_clients')->insert([
-            'client_id' => $client->id,
-            'created_at' => new \DateTime,
-            'updated_at' => new \DateTime,
-        ]);
-    
-        $response->assertStatus(200);
-        $response->assertJsonStructure([
-            'success' => ['token']
-        ]);
+        // $response->assertStatus(200);
+        // $response->assertJsonStructure([
+        //     'success' => ['token']
+        // ]);
 
     }
 

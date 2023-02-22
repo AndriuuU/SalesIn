@@ -21,6 +21,18 @@ class RegisterTest extends TestCase
          /** @test */
          public function register_test() {
 
+            $clientRepository = new ClientRepository();
+            $client = $clientRepository->createPersonalAccessClient(
+                null, 'Test Personal Access Client', 'http://localhost'
+            );
+
+            \DB::table('oauth_personal_access_clients')->insert([
+                'client_id' => $client->id,
+                'created_at' => new \DateTime,
+                'updated_at' => new \DateTime,
+            ]);
+            
+
             $response = $this->post('/register', [
                 'name' => 'usuario',
                 'surname' => 'registro',
@@ -29,9 +41,13 @@ class RegisterTest extends TestCase
                 'password' => '12345678',
             ]);
     
-            $response->assertStatus(302);
-            $response->assertRedirect('/home');
-            $this->assertAuthenticated();
+            $response->assertStatus(200)
+                 ->assertJsonStructure([
+                     'success' => [
+                         'token',
+                         'name',
+                     ],
+                 ]);
     
         }
 }
