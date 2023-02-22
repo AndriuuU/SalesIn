@@ -31,13 +31,6 @@ public function borrar_noticia_test() {
     Storage::fake('articleImage');
     $file = UploadedFile::fake()->image('articleImage.jpg');
 
-    // $article = $this->post('/noticias', [
-    //     'title' => 'Título del test',
-    //     'description' => 'Contenido del test',
-    //     'cicle_id' => $cicle->id,
-    //     'image' => $file
-    // ]);
-
     $article = new Articles;
     $article->title = 'Titulo del test';
     $article->description = 'Contenido del test';

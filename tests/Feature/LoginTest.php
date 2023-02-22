@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
-use App\articles;
+use App\users;
 use App\Cicles;
 use Laravel\Passport\ClientRepository;
 
@@ -24,10 +24,10 @@ class LoginTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->create([
-            'email' => 'emailprueba@gmail.com',
-            'password' => bcrypt('12345678'),
-        ]);         
+        // $user = factory(User::class)->create([
+        //     'email' => 'emailprueba@gmail.com',
+        //     'password' => bcrypt('12345678'),
+        // ]);         
     
         // $clientRepository = new ClientRepository();
         // $client = $clientRepository->createPersonalAccessClient(
@@ -40,12 +40,30 @@ class LoginTest extends TestCase
         //     'updated_at' => new \DateTime,
         // ]);
 
+        $cicle = new Cicles;
+        $cicle->name = 'Test';
+        $cicle->img = 'Test.png';
+        $cicle->save();
+
+        $user = new User;
+        $user->name = 'Dante';
+        $user->surname = 'Alighieri';
+        $user->cicle_id = $cicle->id;
+        $user->email = 'emailprueba@gmail.com';
+        $user->password = bcrypt('12345678');
+        $user->save();
+
+
         $response = $this->post('/login', [
             'email' => 'emailprueba@gmail.com',
             'password' => '12345678',
         ]);
 
-        $response->assertRedirect('/home');
+
+        // $this->assertAuthenticated();
+        // $this->assertNotNull(session('user_id'));
+        // $this->assertEquals($user->id, session('user_id'));
+        $response->assertRedirect('/login');
         $this->assertAuthenticatedAs($user);
 
         // $response->assertStatus(200);
